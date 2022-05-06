@@ -15,11 +15,12 @@ if [ -z "${nnb_converter_path}" ]; then
     git clone git@github.com:josemreis/nnb_converter.git
     nnb_converter_path="$PWD/nnb_converter"
 fi
-## Loop across each sub-directory
+## Loop across each sub-directory and convert to md and js
 for d in */ ; do
     for file in $d*.nnb ; do
         to_convert="$current_path/$file"
         echo $to_convert
-        python3 "$nnb_converter_path/nnb_converter.py" -f "$to_convert" -o "md"
+        python3 "$nnb_converter_path/nnb_converter.py" -f "$to_convert" -o "md" # to markdown
+        python3 "$nnb_converter_path/nnb_converter.py" -f "$to_convert" -o "js" # convert to js
     done
 done
