@@ -1,0 +1,82 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "# 3 Types, Values, and Variables\n\nNotebook for chapter 3 of [JavaScript: The Definitive Guide: Master the World's Most-Used Programming Language, 7th Edition](https://www.oreilly.com/library/view/javascript-the-definitive/9781491952016/).\n\nJavaScript types can be divided into two categories: *primitive types* and *object types*. JavaScript's primitive types are composed by:\n* text\n* number\n* boolean\n* symbol\n* `null`\n* `undefined`\n\nAny type which is not one of the described above is defined as *type object* or an `object`. An `object` is a collection of `properties`, where each property as a name and a value (either a primitive value or another object).\n\nAn ordinary object is an *unordered collection of named values*. However, there are special types of object which differ from these standard objects, namely:\n* An `array` is an *ordered collection of numbered values*"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "const fruits = ['Maçã', 'Banana'];\n\nconsole.log(fruits);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "[ 'Maçã', 'Banana' ]",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "* A `Set` object represents a set of **unique** values"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "const my_set1 = new Set()\n\nmy_set1.add(1)           // Set [ 1 ]\nmy_set1.add(5)           // Set [ 1, 5 ]\nmy_set1.add(5)           // Set [ 1, 5 ]\nmy_set1.add('some text') // Set [ 1, 5, 'some text' ]\n\nconsole.log(my_set1)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Set(3) { 1, 5, 'some text' }",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "* A `Map` object represents mapping keys to values (fairly similar, at least in usage, to Python's dictionaries)"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// this is a map\nconst fruits2 = new Map([\n    [\"apples\", 500],\n    [\"bananas\", 300],\n    [\"oranges\", 200]\n  ]);\n\n  console.log(fruits2)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Map(3) { 'apples' => 500, 'bananas' => 300, 'oranges' => 200 }",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
