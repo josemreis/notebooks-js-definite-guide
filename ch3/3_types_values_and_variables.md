@@ -138,14 +138,6 @@ Math.trunc(3.9) // => 3: convert to an integer by truncating fractional part
 Math.fround(x) // Round to nearest 32-bit float number
 Math.sinh(x) // Hyperbolic sine. Also Math.cosh(), Math.tanh()
 Math.asinh(x) // Hyperbolic arcsine. Also Math.acosh(), Math.atanh()
-
-
-
-
-
-
-
-
 ```
 ```bash
 ## [33mNaN[39m
@@ -244,8 +236,8 @@ let now = Date() // today's date as a Date object
 console.log(now)
 ```
 ```bash
-## 1651853407085
-## Fri May 06 2022 17:10:07 GMT+0100 (Western European Summer Time)
+## 1651862704280
+## Fri May 06 2022 19:45:04 GMT+0100 (Western European Summer Time)
 ```
 
 The date methods will be covered in more detail later on. 
@@ -327,6 +319,15 @@ console.log(x.trimEnd());
 ```
 ```bash
 ## his
+## his
+## [ 'This', 'is', 'a', 'sentence.' ]
+## 0
+## true
+## true
+## true
+## This not is a sentence.
+## this is a sentence.
+## THIS IS A SENTENCE.
 ## ño
 ##   x
 ## x  

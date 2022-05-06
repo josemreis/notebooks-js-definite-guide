@@ -111,14 +111,6 @@ Math.fround(x) // Round to nearest 32-bit float number
 Math.sinh(x) // Hyperbolic sine. Also Math.cosh(), Math.tanh()
 Math.asinh(x) // Hyperbolic arcsine. Also Math.acosh(), Math.atanh()
 
-
-
-
-
-
-
-
-
 /*
 Arithmetic in JavaScript does not raise errors in cases of overflow, underflow, or division by zero. When the result of a numeric operation is larger than the largest representable number (overflow), the result is a special infinity value, Infinity.
 */
