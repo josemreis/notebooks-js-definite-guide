@@ -79,9 +79,9 @@ In addition to base-10 integer literals, JavaScript recognizes hexadecimal (base
 through f (or F), which represent values 10 through 15. Here are examples of hexadecimal integer literals:
 
 ```typescript
-a = 0xff// => 255: (15*16 + 15)
+let a = 0xff// => 255: (15*16 + 15)
 console.log(a)
-b = 0xBADCAFE // => 195939070
+let b = 0xBADCAFE // => 195939070
 console.log(b)
 ```
 ```bash
@@ -97,8 +97,7 @@ Floating-point literals can have a decimal point; they use the traditional synta
 3.14
 2345.6789
 .333333333333333333
-6.02e23
-// 6.02 × 10²³
+6.02e23 // 6.02 × 10²³
 1.4738223E-32 // 1.4738223 × 10 ⁻ ³²
 ```
 ```bash
@@ -109,38 +108,53 @@ Floating-point literals can have a decimal point; they use the traditional synta
 
 JavaScript programs work with numbers using the arithmetic operators . that the language provides. These include + for addition, - for subtraction, * for multiplication, / for division, and % for modulo (remainder after division). ES2016 adds ** for exponentiation. Full details on these and other operators can be found in Chapter 4.
 
-```javascript
-Math.pow(2,53) // => 9007199254740992: 2 to the power 53
-Math.round(.6) // => 1.0: round to the nearest integer
-Math.ceil(.6) // => 1.0: round up to an integer
-Math.floor(.6) // => 0.0: round down to an integer
-Math.abs(-5) // => 5: absolute value
-Math.max(1,2,3) // Return the largest argument
-Math.min(1,2,3) // Return the smallest argument
-Math.random() // Pseudo-random number x where 0 <= x < 1.0
-Math.PI // π: circumference of a circle / diameter
-Math.E // e: The base of the natural logarithm
-Math.sqrt(3) // => 3**0.5: the square root of 3
-Math.pow(3, 1/3) // => 3**(1/3): the cube root of 3
-Math.sin(0) // Trigonometry: also Math.cos, Math.atan, etc.
-Math.log(10) // Natural logarithm of 10
-Math.log(100)/Math.LN10 // Base 10 logarithm of 100
-Math.cbrt(27) // => 3: cube root
-Math.hypot(3, 4) // => 5: square root of sum of squares of all arguments
-Math.log10(100) // ()=> 2: Base-10 logarithm
-Math.log2(1024) // => 10: Base-2 logarithm
-Math.log1p(x) // Natural log of (1+x); accurate for very small x
-Math.expm1(x) // Math.exp(x)-1; the inverse of Math.log1p()
-Math.sign(x) // -1, 0, or 1 for arguments <, ==, or > 0
-Math.imul(2,3) // => 6: optimized multiplication of 32-bit integers
-Math.clz32(0xf) // => 28: number of leading zero bits in a 32-bit integer
-Math.trunc(3.9) // => 3: convert to an integer by truncating fractional part
-Math.fround(x) // Round to nearest 32-bit float number
-Math.sinh(x) // Hyperbolic sine. Also Math.cosh(), Math.tanh()
-Math.asinh(x) // Hyperbolic arcsine. Also Math.acosh(), Math.atanh()
+```typescript
+console.log(Math.pow(2,53));// => 9007199254740992: 2 to the power 53
+console.log(Math.round(.6)); // => 1.0: round to the nearest integer
+console.log(Math.ceil(.6)); // => 1.0: round up to an integer
+console.log(Math.floor(.6)); // => 0.0: round down to an integer
+console.log(Math.abs(-5)); // => 5: absolute value
+console.log(Math.max(1,2,3)); // Return the largest argument
+console.log(Math.min(1,2,3)); // Return the smallest argument
+console.log(Math.random()); // Pseudo-random number x where 0 <= x < 1.0
+console.log(Math.PI); // π: circumference of a circle / diameter
+console.log(Math.E); // e: The base of the natural logarithm
+console.log(Math.sqrt(3)); // => 3**0.5: the square root of 3
+console.log(Math.pow(3, 1/3)); // => 3**(1/3): the cube root of 3
+console.log(Math.sin(0)); // Trigonometry: also Math.cos, Math.atan, etc.
+console.log(Math.log(10)); // Natural logarithm of 10
+console.log(Math.log(100)/Math.LN10); // Base 10 logarithm of 100
+console.log(Math.cbrt(27)); // => 3: cube root
+console.log(Math.hypot(3, 4)); // => 5: square root of sum of squares of all arguments
+console.log(Math.log10(100)); // ()=> 2: Base-10 logarithm
+console.log(Math.log2(1024));// => 10: Base-2 logarithm
+console.log(Math.imul(2,3)); // => 6: optimized multiplication of 32-bit integers
+console.log(Math.clz32(0xf)); // => 28: number of leading zero bits in a 32-bit integer
+console.log(Math.trunc(3.9)); // => 3: convert to an integer by truncating fractional part
 ```
 ```bash
-## [33mNaN[39m
+## 9007199254740992
+## 1
+## 1
+## 0
+## 5
+## 3
+## 1
+## 0.35345968113869386
+## 3.141592653589793
+## 2.718281828459045
+## 1.7320508075688772
+## 1.4422495703074083
+## 0
+## 2.302585092994046
+## 2
+## 3
+## 5
+## 2
+## 10
+## 6
+## 28
+## 3
 ```
 
 Arithmetic in JavaScript does not raise errors in cases of overflow, underflow, or division by zero. When the result of a numeric operation is larger than the largest representable number (overflow), the result is a special infinity value, Infinity.
@@ -236,8 +250,8 @@ let now = Date() // today's date as a Date object
 console.log(now)
 ```
 ```bash
-## 1651862704280
-## Fri May 06 2022 19:45:04 GMT+0100 (Western European Summer Time)
+## 1651914489540
+## Sat May 07 2022 10:08:09 GMT+0100 (Western European Summer Time)
 ```
 
 The date methods will be covered in more detail later on. 
@@ -282,7 +296,7 @@ console.log('You can\'t do that!')
 To determine the length of a string we can use the `.length` property of the string. 
 
 ```javascript
-a_text = "This is a sentence."
+let a_text = "This is a sentence."
 
 console.log("Current sentence has " + a_text.length + " characters")
 ```
