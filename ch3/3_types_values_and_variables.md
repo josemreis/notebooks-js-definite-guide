@@ -134,20 +134,6 @@ console.log(Math.trunc(3.9)); // => 3: convert to an integer by truncating fract
 ```
 ```bash
 ## 9007199254740992
-## 1
-## 1
-## 0
-## 5
-## 3
-## 1
-## 0.35345968113869386
-## 3.141592653589793
-## 2.718281828459045
-## 1.7320508075688772
-## 1.4422495703074083
-## 0
-## 2.302585092994046
-## 2
 ## 3
 ## 5
 ## 2
@@ -250,8 +236,8 @@ let now = Date() // today's date as a Date object
 console.log(now)
 ```
 ```bash
-## 1651914489540
-## Sat May 07 2022 10:08:09 GMT+0100 (Western European Summer Time)
+## 1651920273707
+## Sat May 07 2022 11:44:33 GMT+0100 (Western European Summer Time)
 ```
 
 The date methods will be covered in more detail later on. 
@@ -334,19 +320,6 @@ console.log(x.trimEnd());
 ```bash
 ## his
 ## his
-## [ 'This', 'is', 'a', 'sentence.' ]
-## 0
-## true
-## true
-## true
-## This not is a sentence.
-## this is a sentence.
-## THIS IS A SENTENCE.
-## ño
-##   x
-## x  
-## **x
-## x--
 ## Hello world!
 ## Hello world!            
 ##         Hello world!
@@ -445,43 +418,150 @@ console.log(romeNumerize`I have ${ 2 } cats. But my neighbour has ${ 4 }`)
 
 The second function did not work, that is because tagged literals are treated like arrays of strings where the the `${}` is the delimiter spliting the string. Since we only index the strings in position 0 and 1, we are only taking into consideration the first delimiter. To make it scalable to more.
 
+
+
 ```javascript
-function romeNumerizeEverything(strings, ...num){
-    let newStr = '';
-
-    for (let i = 0; i < strings.length; i++) {
-        
-        console.log(` [+] In position ${ i } in the strings array we have string: ${ strings[i] }`)
-        if (i > 0) {
-            console.log(` [!] In position ${ i-1 } in the num array we have value: ${ num[i-1] }`)
-            newStr += romanize(num[i-1]);
-        }
-        newStr += strings[i]
-    }
-    return newStr;
-}
-
 console.log(romeNumerizeEverything`I have ${ 2 } cats.`)
-console.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4 }`)
-console.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4 } cats. His neighbour, however, has something like ${ 12 } cats.`)
 ```
 ```bash
 ##  [+] In position 0 in the strings array we have string: I have 
 ##  [+] In position 1 in the strings array we have string:  cats.
 ##  [!] In position 0 in the num array we have value: 2
 ## I have II cats.
+```
+
+```javascript
+
+console.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4 }`)
+```
+```bash
 ##  [+] In position 0 in the strings array we have string: I have 
 ##  [+] In position 1 in the strings array we have string:  cats. But my neighbour has 
 ##  [!] In position 0 in the num array we have value: 2
 ##  [+] In position 2 in the strings array we have string: 
 ##  [!] In position 1 in the num array we have value: 4
 ## I have II cats. But my neighbour has IV
+```
+
+```javascript
+
+console.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4 } cats. His neighbour, however, has something like ${ 12 } cats.`)
+```
+```bash
 ##  [+] In position 0 in the strings array we have string: I have 
 ##  [+] In position 1 in the strings array we have string:  cats. But my neighbour has 
 ##  [!] In position 0 in the num array we have value: 2
-##  [+] In position 2 in the strings array we have string:  cats. His neighbour, however, has something like 
-##  [!] In position 1 in the num array we have value: 4
-##  [+] In position 3 in the strings array we have string:  cats.
-##  [!] In position 2 in the num array we have value: 12
 ## I have II cats. But my neighbour has IV cats. His neighbour, however, has something like XII cats.
+```
+
+```javascript
+
+console.log(romeNumerizeEverything`I have ${ 2 } cats. My partner has none. But my neighbour has ${ 4 } cats. His neighbour, however, has something like ${ 12 } cats.`)
+```
+```bash
+##  [+] In position 0 in the strings array we have string: I have 
+## I have II cats. My partner has none. But my neighbour has IV cats. His neighbour, however, has something like XII cats.
+```
+
+## Boolean Values
+
+A boolean value represents truth or falsehood, on or off, yes or no. There are only two possible values of this type. The reserved words true and false evaluate to these two values. These will be covered in more detail later one...
+
+Overall, we can use operators to generate boolean values. e.g.
+
+```javascript
+let a = null;
+
+console.log(a === null);
+console.log(a !== 2);
+```
+```bash
+## true
+## true
+```
+
+As in other programming languages, like R, we have the `&` and `|` boolean operators representing the boolean **AND**/**OR**.
+
+```javascript
+let a = "reasonably large string";
+
+if (a.length > 3 & a.length < 500) {
+    console.log("Yes, it is reasonably large")
+}
+```
+```bash
+## Yes, it is reasonably large
+```
+
+The `&&` operator evaluates a true value *if and only if* both operands are true, false otherwise.
+
+```javascript
+let a = null;
+
+if (a !== null && (a.length > 3 & a.length < 500) ) {
+    console.log("Yes, it is reasonably large")
+} else {
+    console.log("No size at all, it is a null!")
+}
+```
+```bash
+## No size at all, it is a null!
+```
+
+The operator `||` evaluates a boolean to true if either or the operands (or all) evaluate to true.
+
+```javascript
+let a = "A";
+
+if (a !== null || (a.length > 3 & a.length < 500) ) {
+    console.log("This is dangerous stuff.")
+} else {
+    console.log("No size at all, it is a null!")
+}
+```
+```bash
+## This is dangerous stuff.
+```
+
+## `null` and `undefined`
+
+`null` is a language keyword that evaluates to a special value that is usually used to indicate the absence of a value. Using the typeof operator on null returns the string “object”, indicating that null can be thought of as a special object value that indicates “no object”.
+
+The `undefined` value occurs in more specific circumstances, namely:
+* values that have not been initialized
+* when you query an object property that does not exist
+* or in functions which do not return anything or in functions for which no arguments were passed.
+
+```javascript
+let a;
+console.log(a);
+```
+```bash
+## undefined
+```
+
+```javascript
+function iShouldReturnStuff(a,b) {
+    let c = a + b
+} 
+
+console.log(iShouldReturnStuff(1,3))
+```
+```bash
+## undefined
+```
+
+```javascript
+function iShouldReturnStuff(a,b) {
+    let c = a + b
+    return [a,b,c]
+} 
+
+console.log(iShouldReturnStuff())
+// note that arithmetic operations with undefined objects seem to lead to NaN
+console.log(undefined + undefined)
+```
+```bash
+## [ undefined, undefined, NaN ]
+## NaN
 ```

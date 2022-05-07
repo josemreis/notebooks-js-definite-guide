@@ -316,15 +316,97 @@ function romeNumerizeEverything(strings, ...num){
     for (let i = 0; i < strings.length; i++) {
         
         console.log(` [+] In position ${ i } in the strings array we have string: ${ strings[i] }`)
+        // because the first string can never be a delimiter
         if (i > 0) {
+            // fetch the number and subtract the index of its position so we get the next
             console.log(` [!] In position ${ i-1 } in the num array we have value: ${ num[i-1] }`)
             newStr += romanize(num[i-1]);
         }
+        // add the string
         newStr += strings[i]
     }
     return newStr;
 }
 
 console.log(romeNumerizeEverything`I have ${ 2 } cats.`)
+
+
 console.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4 }`)
+
+
 console.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4 } cats. His neighbour, however, has something like ${ 12 } cats.`)
+
+
+console.log(romeNumerizeEverything`I have ${ 2 } cats. My partner has none. But my neighbour has ${ 4 } cats. His neighbour, however, has something like ${ 12 } cats.`)
+
+/*
+## Boolean Values
+A boolean value represents truth or falsehood, on or off, yes or no. There are only two possible values of this type. The reserved words true and false evaluate to these two values. These will be covered in more detail later one...
+Overall, we can use operators to generate boolean values. e.g.
+*/
+
+let a = null;
+
+console.log(a === null);
+console.log(a !== 2);
+
+/*
+As in other programming languages, like R, we have the `&` and `|` boolean operators representing the boolean **AND**/**OR**.
+*/
+
+let a = "reasonably large string";
+
+if (a.length > 3 & a.length < 500) {
+    console.log("Yes, it is reasonably large")
+}
+
+/*
+The `&&` operator evaluates a true value *if and only if* both operands are true, false otherwise.
+*/
+
+let a = null;
+
+if (a !== null && (a.length > 3 & a.length < 500) ) {
+    console.log("Yes, it is reasonably large")
+} else {
+    console.log("No size at all, it is a null!")
+}
+
+/*
+The operator `||` evaluates a boolean to true if either or the operands (or all) evaluate to true.
+*/
+
+let a = "A";
+
+if (a !== null || (a.length > 3 & a.length < 500) ) {
+    console.log("This is dangerous stuff.")
+} else {
+    console.log("No size at all, it is a null!")
+}
+
+/*
+## `null` and `undefined`
+`null` is a language keyword that evaluates to a special value that is usually used to indicate the absence of a value. Using the typeof operator on null returns the string “object”, indicating that null can be thought of as a special object value that indicates “no object”.
+The `undefined` value occurs in more specific circumstances, namely:
+* values that have not been initialized
+* when you query an object property that does not exist
+* or in functions which do not return anything or in functions for which no arguments were passed.
+*/
+
+let a;
+console.log(a);
+
+function iShouldReturnStuff(a,b) {
+    let c = a + b
+} 
+
+console.log(iShouldReturnStuff(1,3))
+
+function iShouldReturnStuff(a,b) {
+    let c = a + b
+    return [a,b,c]
+} 
+
+console.log(iShouldReturnStuff())
+// note that arithmetic operations with undefined objects seem to lead to NaN
+console.log(undefined + undefined)
