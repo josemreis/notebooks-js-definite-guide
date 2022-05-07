@@ -135,12 +135,6 @@ console.log(Math.trunc(3.9)); // => 3: convert to an integer by truncating fract
 ```bash
 ## 9007199254740992
 ## 3
-## 5
-## 2
-## 10
-## 6
-## 28
-## 3
 ```
 
 Arithmetic in JavaScript does not raise errors in cases of overflow, underflow, or division by zero. When the result of a numeric operation is larger than the largest representable number (overflow), the result is a special infinity value, Infinity.
@@ -236,8 +230,8 @@ let now = Date() // today's date as a Date object
 console.log(now)
 ```
 ```bash
-## 1651920273707
-## Sat May 07 2022 11:44:33 GMT+0100 (Western European Summer Time)
+## 1651926093028
+## Sat May 07 2022 13:21:33 GMT+0100 (Western European Summer Time)
 ```
 
 The date methods will be covered in more detail later on. 
@@ -319,7 +313,10 @@ console.log(x.trimEnd());
 ```
 ```bash
 ## his
-## his
+##   x
+## x  
+## **x
+## x--
 ## Hello world!
 ## Hello world!            
 ##         Hello world!
@@ -451,6 +448,10 @@ console.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4
 ##  [+] In position 0 in the strings array we have string: I have 
 ##  [+] In position 1 in the strings array we have string:  cats. But my neighbour has 
 ##  [!] In position 0 in the num array we have value: 2
+##  [+] In position 2 in the strings array we have string:  cats. His neighbour, however, has something like 
+##  [!] In position 1 in the num array we have value: 4
+##  [+] In position 3 in the strings array we have string:  cats.
+##  [!] In position 2 in the num array we have value: 12
 ## I have II cats. But my neighbour has IV cats. His neighbour, however, has something like XII cats.
 ```
 
@@ -498,7 +499,7 @@ The `&&` operator evaluates a true value *if and only if* both operands are true
 ```javascript
 let a = null;
 
-if (a !== null && (a.length > 3 & a.length < 500) ) {
+if (a !== null && (a.length > 3 & a.length < 500)) {
     console.log("Yes, it is reasonably large")
 } else {
     console.log("No size at all, it is a null!")
@@ -513,7 +514,7 @@ The operator `||` evaluates a boolean to true if either or the operands (or all)
 ```javascript
 let a = "A";
 
-if (a !== null || (a.length > 3 & a.length < 500) ) {
+if (a !== null || (a.length > 3 & a.length < 500)) {
     console.log("This is dangerous stuff.")
 } else {
     console.log("No size at all, it is a null!")
@@ -541,21 +542,21 @@ console.log(a);
 ```
 
 ```javascript
-function iShouldReturnStuff(a,b) {
+function iShouldReturnStuff(a, b) {
     let c = a + b
-} 
+}
 
-console.log(iShouldReturnStuff(1,3))
+console.log(iShouldReturnStuff(1, 3))
 ```
 ```bash
 ## undefined
 ```
 
 ```javascript
-function iShouldReturnStuff(a,b) {
+function iShouldReturnStuff(a, b) {
     let c = a + b
-    return [a,b,c]
-} 
+    return [a, b, c]
+}
 
 console.log(iShouldReturnStuff())
 // note that arithmetic operations with undefined objects seem to lead to NaN
@@ -564,4 +565,142 @@ console.log(undefined + undefined)
 ```bash
 ## [ undefined, undefined, NaN ]
 ## NaN
+```
+
+## Symbols
+
+Symbols were introduced in ES6 to serve as non-string property names. Recall that by default an `Object` is an unordered collection of properties, where each property has a name and a value. Property names are typically strings, but `Symbols` can also serve this purpose.
+
+
+
+```javascript
+// generate the string and symbol property names
+let strPropertyName = "string name";
+console.log(typeof(strPropertyName));
+let symbolPropertyName = Symbol("symbol name");
+console.log(typeof(symbolPropertyName));
+```
+```bash
+## string
+## symbol
+```
+
+```javascript
+// add properties to the initialized object
+simpleObject[strPropertyName] = 1;
+simpleObject[symbolPropertyName] = 2;
+
+console.log(simpleObject)
+```
+```bash
+## { 'string name': 1, [Symbol(symbol name)]: 2 }
+```
+
+To obtain the value of the symbol you have to invoke the symbol value.
+
+```javascript
+Symbol(simpleObject[symbolPropertyName])
+```
+```bash
+## Symbol(2)
+```
+
+This usefullness of this object type seems to be tied with iterators which will be covered much, much further down the road.
+
+## Immutable Primitive Values and Mutable Object Rereferences
+
+The fundamental difference between primitive values (undefined, null, booleans, numbers, and strings) and objects (e.g. arrays and functions) is that the former are immutable - i.e. there is no way of changing a primitive value. E.g.
+
+```javascript
+let s = "hello";
+s.toUpperCase();
+s
+// Start with some lowercase text
+// Returns "HELLO", but doesn't alter s
+// => "hello": the original string has not changed
+```
+```bash
+## 'hello'
+```
+
+Primitives are also compared by value. Objects, however, are mutable and cannot be compared just by value. Two arrays are not equal even if they have the same values in the same order.
+
+```javascript
+let o = { x: 1 }, p = { x: 1 };
+console.log(o === p);
+let a = ["fooh"], b = ["fooh"];
+console.log(a === b);
+```
+```bash
+## false
+## false
+```
+
+Instead, objects are compared by references: *in js, two objects are equal if and only if they both refer to the same underlying object*.
+
+```javascript
+let a = [];
+let b = a;
+b[0] = 1;
+console.log(a[0])
+console.log(a === b)
+```
+```bash
+## 1
+## true
+```
+
+As you can see, assigning object `a`, an empty array, to `b` did not create a copy of it, but rather a reference. Now changes to `b` will also occur in `a` as it references it. If you want to create a new copy of an object, say of `a`, you must **explicitly copy its properties**, in this case, the elements of the array.
+
+```javascript
+let a = [1,2,3,4];
+let b = [];
+for(let i = 0; i<a.length; i++) {
+    b[i] = a[i];
+}
+let c = Array.from(b)
+console.log(c)
+```
+```bash
+## [ 1, 2, 3, 4 ]
+```
+
+Similarly, if we want to compare two distinct objects, we must compare their elements or properties.
+
+
+
+```javascript
+let x = [];
+let y = x;
+compareArray(x,y)
+```
+```bash
+## arrays reference each other, so they are the same object
+```
+
+```javascript
+let x = [];
+let y = [];
+compareArray(x,y)
+```
+```bash
+## the arrays have the same elements
+```
+
+```javascript
+let x = [1, "a", "b", 2];
+let y = [1, "a", "b"];
+compareArray(x,y)
+```
+```bash
+## the arrays have different lengths, cannot have the same elements
+```
+
+```javascript
+let x = [1, "a", 2, "b"];
+let y = [1, "a", "b", 2];
+compareArray(x, y)
+```
+```bash
+## Element 2 in position 2 is different from b in the same position
 ```

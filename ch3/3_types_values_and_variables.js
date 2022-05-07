@@ -278,17 +278,17 @@ console.log(romeNumerize`I have ${ 2 } cats. But my neighbour has ${ 4 }`)
 The second function did not work, that is because tagged literals are treated like arrays of strings where the the `${}` is the delimiter spliting the string. Since we only index the strings in position 0 and 1, we are only taking into consideration the first delimiter. To make it scalable to more.
 */
 
-function romeNumerizeEverything(strings, ...num){
+function romeNumerizeEverything(strings, ...num) {
     let newStr = '';
 
     for (let i = 0; i < strings.length; i++) {
-        
-        console.log(` [+] In position ${ i } in the strings array we have string: ${ strings[i] }`)
+
+        console.log(` [+] In position ${i} in the strings array we have string: ${strings[i]}`)
         // because the first string can never be a delimiter
         if (i > 0) {
             // fetch the number and subtract the index of its position so we get the next
-            console.log(` [!] In position ${ i-1 } in the num array we have value: ${ num[i-1] }`)
-            newStr += romanize(num[i-1]);
+            console.log(` [!] In position ${i - 1} in the num array we have value: ${num[i - 1]}`)
+            newStr += romanize(num[i - 1]);
         }
         // add the string
         newStr += strings[i]
@@ -332,7 +332,7 @@ The `&&` operator evaluates a true value if and only if both operands are true, 
 
 let a = null;
 
-if (a !== null && (a.length > 3 & a.length < 500) ) {
+if (a !== null && (a.length > 3 & a.length < 500)) {
     console.log("Yes, it is reasonably large")
 } else {
     console.log("No size at all, it is a null!")
@@ -344,7 +344,7 @@ The operator `||` evaluates a boolean to true if either or the operands (or all)
 
 let a = "A";
 
-if (a !== null || (a.length > 3 & a.length < 500) ) {
+if (a !== null || (a.length > 3 & a.length < 500)) {
     console.log("This is dangerous stuff.")
 } else {
     console.log("No size at all, it is a null!")
@@ -357,17 +357,127 @@ if (a !== null || (a.length > 3 & a.length < 500) ) {
 let a;
 console.log(a);
 
-function iShouldReturnStuff(a,b) {
+function iShouldReturnStuff(a, b) {
     let c = a + b
-} 
+}
 
-console.log(iShouldReturnStuff(1,3))
+console.log(iShouldReturnStuff(1, 3))
 
-function iShouldReturnStuff(a,b) {
+function iShouldReturnStuff(a, b) {
     let c = a + b
-    return [a,b,c]
-} 
+    return [a, b, c]
+}
 
 console.log(iShouldReturnStuff())
 // note that arithmetic operations with undefined objects seem to lead to NaN
 console.log(undefined + undefined)
+
+/*
+## Symbols Symbols were introduced in ES6 to serve as non-string property names. Recall that by default an `Object` is an unordered collection of properties, where each property has a name and a value. Property names are typically strings, but `Symbols` can also serve this purpose.
+*/
+
+// start by creating an empty Object
+const simpleObject = {};
+
+// generate the string and symbol property names
+let strPropertyName = "string name";
+console.log(typeof(strPropertyName));
+let symbolPropertyName = Symbol("symbol name");
+console.log(typeof(symbolPropertyName));
+
+// add properties to the initialized object
+simpleObject[strPropertyName] = 1;
+simpleObject[symbolPropertyName] = 2;
+
+console.log(simpleObject)
+
+/*
+To obtain the value of the symbol you have to invoke the symbol value.
+*/
+
+Symbol(simpleObject[symbolPropertyName])
+
+/*
+This usefullness of this object type seems to be tied with iterators which will be covered much, much further down the road.
+*/
+
+/*
+## Immutable Primitive Values and Mutable Object Rereferences The fundamental difference between primitive values (undefined, null, booleans, numbers, and strings) and objects (e.g. arrays and functions) is that the former are immutable - i.e. there is no way of changing a primitive value. E.g.
+*/
+
+let s = "hello";
+s.toUpperCase();
+s
+// Start with some lowercase text
+// Returns "HELLO", but doesn't alter s
+// => "hello": the original string has not changed
+
+/*
+Primitives are also compared by value. Objects, however, are mutable and cannot be compared just by value. Two arrays are not equal even if they have the same values in the same order.
+*/
+
+let o = { x: 1 }, p = { x: 1 };
+console.log(o === p);
+let a = ["fooh"], b = ["fooh"];
+console.log(a === b);
+
+/*
+Instead, objects are compared by references: in js, two objects are equal if and only if they both refer to the same underlying object.
+*/
+
+let a = [];
+let b = a;
+b[0] = 1;
+console.log(a[0])
+console.log(a === b)
+
+/*
+As you can see, assigning object `a`, an empty array, to `b` did not create a copy of it, but rather a reference. Now changes to `b` will also occur in `a` as it references it. If you want to create a new copy of an object, say of `a`, you must explicitly copy its properties, in this case, the elements of the array.
+*/
+
+let a = [1,2,3,4];
+let b = [];
+for(let i = 0; i<a.length; i++) {
+    b[i] = a[i];
+}
+let c = Array.from(b)
+console.log(c)
+
+/*
+Similarly, if we want to compare two distinct objects, we must compare their elements or properties.
+*/
+
+function compareArray(a, b) {
+    if (a === b) {
+        console.log("arrays reference each other, so they are the same object");
+        return true;
+    } else if (a.length !== b.length) {
+        console.log("the arrays have different lengths, cannot have the same elements");
+        return false;
+    } else {
+        for (let i = 0; i < a.length; i++) {
+            if (a[i] !== b[i]) {
+                console.log(`Element ${a[i]} in position ${i} is different from ${b[i]} in the same position`)
+                return false;
+            }
+        }
+        console.log("the arrays have the same elements");
+        return true;
+    }
+}
+
+let x = [];
+let y = x;
+compareArray(x,y)
+
+let x = [];
+let y = [];
+compareArray(x,y)
+
+let x = [1, "a", "b", 2];
+let y = [1, "a", "b"];
+compareArray(x,y)
+
+let x = [1, "a", 2, "b"];
+let y = [1, "a", "b", 2];
+compareArray(x, y)
