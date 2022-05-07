@@ -704,3 +704,6 @@ compareArray(x, y)
 ```bash
 ## Element 2 in position 2 is different from b in the same position
 ```
+
+## Type conversions
+

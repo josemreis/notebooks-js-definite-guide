@@ -1176,6 +1176,13 @@
                     ]
                 }
             ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "## Type conversions\n\n"
+            ],
+            "outputs": []
         }
     ]
 }

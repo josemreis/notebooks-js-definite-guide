@@ -481,3 +481,7 @@ compareArray(x,y)
 let x = [1, "a", 2, "b"];
 let y = [1, "a", "b", 2];
 compareArray(x, y)
+
+/*
+## Type conversions
+*/
