@@ -303,4 +303,28 @@ function romeNumerize(strings, num){
     return strings[0] + romanize(num) + strings[1];
 }
 
-romeNumerize`I have ${2} cats.`
+console.log(romeNumerize`I have ${ 2 } cats.`)
+console.log(romeNumerize`I have ${ 2 } cats. But my neighbour has ${ 4 }`)
+
+/*
+The second function did not work, that is because tagged literals are treated like arrays of strings where the the `${}` is the delimiter spliting the string. Since we only index the strings in position 0 and 1, we are only taking into consideration the first delimiter. To make it scalable to more.
+*/
+
+function romeNumerizeEverything(strings, ...num){
+    let newStr = '';
+
+    for (let i = 0; i < strings.length; i++) {
+        
+        console.log(` [+] In position ${ i } in the strings array we have string: ${ strings[i] }`)
+        if (i > 0) {
+            console.log(` [!] In position ${ i-1 } in the num array we have value: ${ num[i-1] }`)
+            newStr += romanize(num[i-1]);
+        }
+        newStr += strings[i]
+    }
+    return newStr;
+}
+
+console.log(romeNumerizeEverything`I have ${ 2 } cats.`)
+console.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4 }`)
+console.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4 } cats. His neighbour, however, has something like ${ 12 } cats.`)

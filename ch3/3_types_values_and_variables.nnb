@@ -594,15 +594,60 @@
         {
             "language": "javascript",
             "source": [
-                "function romanize (num) {\n    // from: https://stackoverflow.com/questions/9083037/convert-a-number-into-a-roman-numeral-in-javascript\n    if (isNaN(num))\n        return NaN;\n    var digits = String(+num).split(\"\"),\n        key = [\"\",\"C\",\"CC\",\"CCC\",\"CD\",\"D\",\"DC\",\"DCC\",\"DCCC\",\"CM\",\n               \"\",\"X\",\"XX\",\"XXX\",\"XL\",\"L\",\"LX\",\"LXX\",\"LXXX\",\"XC\",\n               \"\",\"I\",\"II\",\"III\",\"IV\",\"V\",\"VI\",\"VII\",\"VIII\",\"IX\"],\n        roman = \"\",\n        i = 3;\n    while (i--)\n        roman = (key[+digits.pop() + (i * 10)] || \"\") + roman;\n    return Array(+digits.join(\"\") + 1).join(\"M\") + roman;\n}\n\nfunction romeNumerize(strings, num){\n    return strings[0] + romanize(num) + strings[1];\n}\n\nromeNumerize`I have ${2} cats.`"
+                "function romanize (num) {\n    // from: https://stackoverflow.com/questions/9083037/convert-a-number-into-a-roman-numeral-in-javascript\n    if (isNaN(num))\n        return NaN;\n    var digits = String(+num).split(\"\"),\n        key = [\"\",\"C\",\"CC\",\"CCC\",\"CD\",\"D\",\"DC\",\"DCC\",\"DCCC\",\"CM\",\n               \"\",\"X\",\"XX\",\"XXX\",\"XL\",\"L\",\"LX\",\"LXX\",\"LXXX\",\"XC\",\n               \"\",\"I\",\"II\",\"III\",\"IV\",\"V\",\"VI\",\"VII\",\"VIII\",\"IX\"],\n        roman = \"\",\n        i = 3;\n    while (i--)\n        roman = (key[+digits.pop() + (i * 10)] || \"\") + roman;\n    return Array(+digits.join(\"\") + 1).join(\"M\") + roman;\n}\n\nfunction romeNumerize(strings, num){\n    return strings[0] + romanize(num) + strings[1];\n}\n\nconsole.log(romeNumerize`I have ${ 2 } cats.`)\nconsole.log(romeNumerize`I have ${ 2 } cats. But my neighbour has ${ 4 }`)"
             ],
             "outputs": [
                 {
                     "items": [
                         {
-                            "mime": "text/plain",
+                            "mime": "application/vnd.code.notebook.stdout",
                             "value": [
-                                "\u001b[32m'I have II cats.'\u001b[39m"
+                                "I have II cats.",
+                                "I have II cats. But my neighbour has ",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "The second function did not work, that is because tagged literals are treated like arrays of strings where the the `${}` is the delimiter spliting the string. Since we only index the strings in position 0 and 1, we are only taking into consideration the first delimiter. To make it scalable to more."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "function romeNumerizeEverything(strings, ...num){\n    let newStr = '';\n\n    for (let i = 0; i < strings.length; i++) {\n        \n        console.log(` [+] In position ${ i } in the strings array we have string: ${ strings[i] }`)\n        if (i > 0) {\n            console.log(` [!] In position ${ i-1 } in the num array we have value: ${ num[i-1] }`)\n            newStr += romanize(num[i-1]);\n        }\n        newStr += strings[i]\n    }\n    return newStr;\n}\n\nconsole.log(romeNumerizeEverything`I have ${ 2 } cats.`)\nconsole.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4 }`)\nconsole.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4 } cats. His neighbour, however, has something like ${ 12 } cats.`)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                " [+] In position 0 in the strings array we have string: I have ",
+                                " [+] In position 1 in the strings array we have string:  cats.",
+                                " [!] In position 0 in the num array we have value: 2",
+                                "I have II cats.",
+                                " [+] In position 0 in the strings array we have string: I have ",
+                                " [+] In position 1 in the strings array we have string:  cats. But my neighbour has ",
+                                " [!] In position 0 in the num array we have value: 2",
+                                " [+] In position 2 in the strings array we have string: ",
+                                " [!] In position 1 in the num array we have value: 4",
+                                "I have II cats. But my neighbour has IV",
+                                " [+] In position 0 in the strings array we have string: I have ",
+                                " [+] In position 1 in the strings array we have string:  cats. But my neighbour has ",
+                                " [!] In position 0 in the num array we have value: 2",
+                                " [+] In position 2 in the strings array we have string:  cats. His neighbour, however, has something like ",
+                                " [!] In position 1 in the num array we have value: 4",
+                                " [+] In position 3 in the strings array we have string:  cats.",
+                                " [!] In position 2 in the num array we have value: 12",
+                                "I have II cats. But my neighbour has IV cats. His neighbour, however, has something like XII cats.",
+                                ""
                             ]
                         }
                     ]
