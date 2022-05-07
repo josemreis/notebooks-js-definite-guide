@@ -252,3 +252,55 @@ for (let i = 0; i <= max_char; i++) {
     new_text += a_text[i]
 }
 console.log(new_text)
+
+/*
+### Template Literals
+In ES6, string literals can be delimited with  backtics "`".
+*/
+
+console.log(`This is a string with backticks`)
+
+/*
+This matters because strings with these delimiters allow for interpolation, namely the final value of a string literal
+in backticks is computed by evaluating any included expressions, converting the values of those expressions to strings and combining those computed strings with the literal characters within the backticks.
+*/
+
+let cur_name = "Bill";
+let greeting_not_work = "Hello ${ cur_name }. "// Hello Bill
+let greeting_works = `Hello ${ cur_name }. `// Hello Bill
+console.log(greeting_not_work)
+console.log(greeting_works)
+
+/*
+Everything within the `{ ... }` will be evaluated as a javascript expression, interpreted, and converted into a string.
+*/
+
+let cur_name = Math.PI
+let greeting_works = `Hello ${ cur_name }. `
+console.log(greeting_works)
+
+/*
+#### Tagged template literals
+Tags are functions that perform custom parsing of a template literal. It is just like template literals, however we pass the "tag" to the beggining of the string and it will perform the operation on the entire string.
+*/
+
+function romanize (num) {
+    // from: https://stackoverflow.com/questions/9083037/convert-a-number-into-a-roman-numeral-in-javascript
+    if (isNaN(num))
+        return NaN;
+    var digits = String(+num).split(""),
+        key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
+               "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+               "","I","II","III","IV","V","VI","VII","VIII","IX"],
+        roman = "",
+        i = 3;
+    while (i--)
+        roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+    return Array(+digits.join("") + 1).join("M") + roman;
+}
+
+function romeNumerize(strings, num){
+    return strings[0] + romanize(num) + strings[1];
+}
+
+romeNumerize`I have ${2} cats.`

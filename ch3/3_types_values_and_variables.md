@@ -72,7 +72,7 @@ In a JavaScript program, a base-10 integer is written as a sequence of digits. F
 10000000
 ```
 ```bash
-## [33m10000000[39m
+## 10000000
 ```
 
 In addition to base-10 integer literals, JavaScript recognizes hexadecimal (base-16) values. A hexadecimal literal begins with `0x` or `0X`, followed by a string of hexadecimal digits. A hexadecimal digit is one of the digits 0 through 9 or the letters a (or A)
@@ -101,7 +101,7 @@ Floating-point literals can have a decimal point; they use the traditional synta
 1.4738223E-32 // 1.4738223 × 10 ⁻ ³²
 ```
 ```bash
-## [33m1.4738223e-32[39m
+## 1.4738223e-32
 ```
 
 ### Arithmetic in JavaScript
@@ -178,7 +178,7 @@ Number.MIN_VALUE/2
 -0
 ```
 ```bash
-## [33m0[39m
+## 0
 ```
 
 The not-a-number value has one unusual feature in JavaScript: it does not compare equal to any other value, including itself. This means that you can’t write `x === NaN` to determine whether the value of a variable x is NaN. Instead, you must write `x != x`
@@ -358,7 +358,7 @@ As discussed above, strings are nothing but arrays composed with 16-bit characte
 a_text[0] + a_text[1] + a_text[2] + a_text[3];
 ```
 ```bash
-## [32m'This'[39m
+## 'This'
 ```
 
 ```javascript
@@ -372,4 +372,71 @@ console.log(new_text)
 ```
 ```bash
 ## This 
+```
+
+### Template Literals
+
+In ES6, string literals can be delimited with  backtics "`".
+
+```javascript
+console.log(`This is a string with backticks`)
+```
+```bash
+## This is a string with backticks
+```
+
+This matters because strings with these delimiters allow for interpolation, namely the final value of a string literal
+in backticks is computed by evaluating any included expressions, converting the values of those expressions to strings and combining those computed strings with the literal characters within the backticks.
+
+```javascript
+let cur_name = "Bill";
+let greeting_not_work = "Hello ${ cur_name }. "// Hello Bill
+let greeting_works = `Hello ${ cur_name }. `// Hello Bill
+console.log(greeting_not_work)
+console.log(greeting_works)
+```
+```bash
+## Hello ${ cur_name }. 
+## Hello Bill. 
+```
+
+Everything within the `{ ... }` will be evaluated as a javascript expression, interpreted, and converted into a string.
+
+```javascript
+let cur_name = Math.PI
+let greeting_works = `Hello ${ cur_name }. `
+console.log(greeting_works)
+```
+```bash
+## Hello 3.141592653589793. 
+```
+
+#### Tagged template literals
+
+Tags are functions that perform custom parsing of a template literal. It is just like template literals, however we pass the "tag" to the beggining of the string and it will perform the operation on the entire string.
+
+```javascript
+function romanize (num) {
+    // from: https://stackoverflow.com/questions/9083037/convert-a-number-into-a-roman-numeral-in-javascript
+    if (isNaN(num))
+        return NaN;
+    var digits = String(+num).split(""),
+        key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
+               "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+               "","I","II","III","IV","V","VI","VII","VIII","IX"],
+        roman = "",
+        i = 3;
+    while (i--)
+        roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+    return Array(+digits.join("") + 1).join("M") + roman;
+}
+
+function romeNumerize(strings, num){
+    return strings[0] + romanize(num) + strings[1];
+}
+
+romeNumerize`I have ${2} cats.`
+```
+```bash
+## 'I have II cats.'
 ```

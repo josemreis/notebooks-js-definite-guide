@@ -504,6 +504,110 @@
                     ]
                 }
             ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Template Literals\n\nIn ES6, string literals can be delimited with  backtics \"`\"."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "console.log(`This is a string with backticks`)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "This is a string with backticks",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "This matters because strings with these delimiters allow for interpolation, namely the final value of a string literal\nin backticks is computed by evaluating any included expressions, converting the values of those expressions to strings and combining those computed strings with the literal characters within the backticks."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "let cur_name = \"Bill\";\nlet greeting_not_work = \"Hello ${ cur_name }. \"// Hello Bill\nlet greeting_works = `Hello ${ cur_name }. `// Hello Bill\nconsole.log(greeting_not_work)\nconsole.log(greeting_works)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Hello ${ cur_name }. ",
+                                "Hello Bill. ",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "Everything within the `{ ... }` will be evaluated as a javascript expression, interpreted, and converted into a string."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "let cur_name = Math.PI\nlet greeting_works = `Hello ${ cur_name }. `\nconsole.log(greeting_works)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Hello 3.141592653589793. ",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#### Tagged template literals\n\nTags are functions that perform custom parsing of a template literal. It is just like template literals, however we pass the \"tag\" to the beggining of the string and it will perform the operation on the entire string."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "function romanize (num) {\n    // from: https://stackoverflow.com/questions/9083037/convert-a-number-into-a-roman-numeral-in-javascript\n    if (isNaN(num))\n        return NaN;\n    var digits = String(+num).split(\"\"),\n        key = [\"\",\"C\",\"CC\",\"CCC\",\"CD\",\"D\",\"DC\",\"DCC\",\"DCCC\",\"CM\",\n               \"\",\"X\",\"XX\",\"XXX\",\"XL\",\"L\",\"LX\",\"LXX\",\"LXXX\",\"XC\",\n               \"\",\"I\",\"II\",\"III\",\"IV\",\"V\",\"VI\",\"VII\",\"VIII\",\"IX\"],\n        roman = \"\",\n        i = 3;\n    while (i--)\n        roman = (key[+digits.pop() + (i * 10)] || \"\") + roman;\n    return Array(+digits.join(\"\") + 1).join(\"M\") + roman;\n}\n\nfunction romeNumerize(strings, num){\n    return strings[0] + romanize(num) + strings[1];\n}\n\nromeNumerize`I have ${2} cats.`"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "text/plain",
+                            "value": [
+                                "\u001b[32m'I have II cats.'\u001b[39m"
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

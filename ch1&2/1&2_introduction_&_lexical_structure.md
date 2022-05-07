@@ -69,7 +69,7 @@ false // another boolean value
 null // absence of an object
 ```
 ```bash
-## [1mnull[22m
+## null
 ```
 
 ## Identifiers and Reserved Words
@@ -132,7 +132,7 @@ b = 4
 c = a + b
 ```
 ```bash
-## [33m7[39m
+## 7
 ```
 
 ```javascript
@@ -140,7 +140,7 @@ c = a + b
 a = 3; b = 4; c = a + b;
 ```
 ```bash
-## [33m7[39m
+## 7
 ```
 
 ```javascript
@@ -148,7 +148,7 @@ a = 3; b = 4; c = a + b;
 a = 3 b = 4 c = a + b
 ```
 ```bash
-## [33m7[39m
+## 7
 ```
 
 JavaScript does not treat every line break as a semicolon, it usually treats line breaks as semicolons only if it can't parse the code without adding an implicit semicolong. Putting it differently, JavaScript treats a line break as a semicolon if the next nonspace character cannot be interpreted as a continuation of the current statement.
