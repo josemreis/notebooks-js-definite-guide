@@ -1,16 +1,5 @@
 /*
-# 3 Types, Values, and Variables
-Notebook for chapter 3 of [JavaScript: The Definitive Guide: Master the World's Most-Used Programming Language, 7th Edition](https://www.oreilly.com/library/view/javascript-the-definitive/9781491952016/).
-JavaScript types can be divided into two categories: *primitive types* and *object types*. JavaScript's primitive types are composed by:
-* text
-* number
-* boolean
-* symbol
-* `null`
-* `undefined`
-Any type which is not one of the described above is defined as *type object* or an `object`. An `object` is a collection of `properties`, where each property as a name and a value (either a primitive value or another object).
-An ordinary object is an *unordered collection of named values*. However, there are special types of object which differ from these standard objects, such as:
-* An `array` is an *ordered collection of numbered values*
+# 3 Types, Values, and Variables Notebook for chapter 3 of [JavaScript: The Definitive Guide: Master the World's Most-Used Programming Language, 7th Edition](https://www.oreilly.com/library/view/javascript-the-definitive/9781491952016/). JavaScript types can be divided into two categories: primitive types and object types. JavaScript's primitive types are composed by: text number boolean symbol `null` `undefined` Any type which is not one of the described above is defined as type object or an `object`. An `object` is a collection of `properties`, where each property as a name and a value (either a primitive value or another object). An ordinary object is an unordered collection of named values. However, there are special types of object which differ from these standard objects, such as: An `array` is an ordered collection of numbered values
 */
 
 const fruits = ['Maçã', 'Banana'];
@@ -18,7 +7,7 @@ const fruits = ['Maçã', 'Banana'];
 console.log(fruits);
 
 /*
-* A `Set` object represents a set of **unique** values
+A `Set` object represents a set of unique values
 */
 
 const my_set1 = new Set()
@@ -31,7 +20,7 @@ my_set1.add('some text') // Set [ 1, 5, 'some text' ]
 console.log(my_set1)
 
 /*
-* A `Map` object represents mapping keys to values (fairly similar, at least in usage, to Python's dictionaries)
+A `Map` object represents mapping keys to values (fairly similar, at least in usage, to Python's dictionaries)
 */
 
 // this is a map
@@ -44,11 +33,7 @@ const fruits2 = new Map([
   console.log(fruits2)
 
 /*
-Among other...
-## Numbers
-`Number`, a primitive js numeric type, is used to represent integers and to approximate real numbers.
-### Integer Literals
-In a JavaScript program, a base-10 integer is written as a sequence of digits. For example:
+Among other... ## Numbers `Number`, a primitive js numeric type, is used to represent integers and to approximate real numbers. ### Integer Literals In a JavaScript program, a base-10 integer is written as a sequence of digits. For example:
 */
 
 0
@@ -56,8 +41,7 @@ In a JavaScript program, a base-10 integer is written as a sequence of digits. F
 10000000
 
 /*
-In addition to base-10 integer literals, JavaScript recognizes hexadecimal (base-16) values. A hexadecimal literal begins with `0x` or `0X`, followed by a string of hexadecimal digits. A hexadecimal digit is one of the digits 0 through 9 or the letters a (or A)
-through f (or F), which represent values 10 through 15. Here are examples of hexadecimal integer literals:
+In addition to base-10 integer literals, JavaScript recognizes hexadecimal (base-16) values. A hexadecimal literal begins with `0x` or `0X`, followed by a string of hexadecimal digits. A hexadecimal digit is one of the digits 0 through 9 or the letters a (or A) through f (or F), which represent values 10 through 15. Here are examples of hexadecimal integer literals:
 */
 
 let a = 0xff// => 255: (15*16 + 15)
@@ -66,8 +50,7 @@ let b = 0xBADCAFE // => 195939070
 console.log(b)
 
 /*
-### Floating-Point Literals
-Floating-point literals can have a decimal point; they use the traditional syntax for real numbers. A real value is represented as the integral part of the number, followed by a decimal point and the fractional part of the number.
+### Floating-Point Literals Floating-point literals can have a decimal point; they use the traditional syntax for real numbers. A real value is represented as the integral part of the number, followed by a decimal point and the fractional part of the number.
 */
 
 3.14
@@ -77,8 +60,7 @@ Floating-point literals can have a decimal point; they use the traditional synta
 1.4738223E-32 // 1.4738223 × 10 ⁻ ³²
 
 /*
-### Arithmetic in JavaScript
-JavaScript programs work with numbers using the arithmetic operators . that the language provides. These include + for addition, - for subtraction, * for multiplication, / for division, and % for modulo (remainder after division). ES2016 adds ** for exponentiation. Full details on these and other operators can be found in Chapter 4.
+### Arithmetic in JavaScript JavaScript programs work with numbers using the arithmetic operators . that the language provides. These include + for addition, - for subtraction, for multiplication, / for division, and % for modulo (remainder after division). ES2016 adds for exponentiation. Full details on these and other operators can be found in Chapter 4.
 */
 
 console.log(Math.pow(2,53));// => 9007199254740992: 2 to the power 53
@@ -126,8 +108,7 @@ Number.MIN_VALUE/2
 -0
 
 /*
-The not-a-number value has one unusual feature in JavaScript: it does not compare equal to any other value, including itself. This means that you can’t write `x === NaN` to determine whether the value of a variable x is NaN. Instead, you must write `x != x`
-or `Number.isNaN(x)`. Those expressions will be true if, and only if, x has the same value as the global constant NaN.
+The not-a-number value has one unusual feature in JavaScript: it does not compare equal to any other value, including itself. This means that you can’t write `x === NaN` to determine whether the value of a variable x is NaN. Instead, you must write `x != x` or `Number.isNaN(x)`. Those expressions will be true if, and only if, x has the same value as the global constant NaN.
 */
 
 x = NaN
@@ -153,10 +134,7 @@ console.log(Number.isFinite(b))
 console.log(Number.isFinite(c))
 
 /*
-### Arbitrary Precision Integers with BigInt
-As the name implies, BigInt is a numeric type whose values are integers. The type was added to JavaScript mainly to allow the representation of 64-bit integers, which are required for compati‐
-bility with many other programming languages and APIs. But BigInt values can have thousands or even millions of digits, should you have need to work with numbers that large. You can use BigInt() as a function for converting regular JavaScript numbers or
-strings to BigInt values:
+### Arbitrary Precision Integers with BigInt As the name implies, BigInt is a numeric type whose values are integers. The type was added to JavaScript mainly to allow the representation of 64-bit integers, which are required for compati‐ bility with many other programming languages and APIs. But BigInt values can have thousands or even millions of digits, should you have need to work with numbers that large. You can use BigInt() as a function for converting regular JavaScript numbers or strings to BigInt values:
 */
 
 largest_number_allowed = Number.MAX_SAFE_INTEGER
@@ -170,8 +148,7 @@ as_big_int = BigInt(even_larger)
 console.log(as_big_int)
 
 /*
-### Dates and Times
-JavaScript defines a simple Date class for representing and manipulating the numbers that represent dates and times. JavaScript Dates are objects, but they also have a numeric representation as a timestamp that specifies the number of elapsed milliseconds since January 1, 1970:
+### Dates and Times JavaScript defines a simple Date class for representing and manipulating the numbers that represent dates and times. JavaScript Dates are objects, but they also have a numeric representation as a timestamp that specifies the number of elapsed milliseconds since January 1, 1970:
 */
 
 let timestamp = Date.now() // today's date as timestamp
@@ -180,13 +157,7 @@ let now = Date() // today's date as a Date object
 console.log(now)
 
 /*
-The date methods will be covered in more detail later on. 
-## Text
-The JavaScript type for representing text is the *string*. A string is an immutable ordered sequence of 16-bit values, each of which typically representas a Unicode character. The *length* of a string is the number of 16-bit values it contains. JavaScript’s
-strings (and its arrays) use zero-based indexing: the first 16-bit value is at position 0, the second at position 1, and so on. The empty string is the string of length 0. JavaScript does not have a special type that represents a single element of a string.
-### String Literals
-To include a string in a JavaScript program, simply enclose the characters of the string within a matched pair of single or double quotes or backticks ( ' or " or ` ). Double-quote characters and backticks may be contained within strings delimited by single-quote characters, and similarly for strings delimited by double quotes and backticks.
-The original versions of JavaScript required string literals to be written on a single line, and it is common to see JavaScript code that creates long strings by concatenating single-line strings with the + operator. As of ES5, however, you can break a string literal across multiple lines by ending each line but the last with a backslash ( \ ).
+The date methods will be covered in more detail later on. ## Text The JavaScript type for representing text is the string. A string is an immutable ordered sequence of 16-bit values, each of which typically representas a Unicode character. The length of a string is the number of 16-bit values it contains. JavaScript’s strings (and its arrays) use zero-based indexing: the first 16-bit value is at position 0, the second at position 1, and so on. The empty string is the string of length 0. JavaScript does not have a special type that represents a single element of a string. ### String Literals To include a string in a JavaScript program, simply enclose the characters of the string within a matched pair of single or double quotes or backticks ( ' or " or ` ). Double-quote characters and backticks may be contained within strings delimited by single-quote characters, and similarly for strings delimited by double quotes and backticks. The original versions of JavaScript required string literals to be written on a single line, and it is common to see JavaScript code that creates long strings by concatenating single-line strings with the + operator. As of ES5, however, you can break a string literal across multiple lines by ending each line but the last with a backslash ( \ ).
 */
 
 a_text = "Hello"
@@ -204,7 +175,7 @@ The backslash character ( \ ) has a special purpose in JavaScript strings. Combi
 console.log('You can\'t do that!')
 
 /*
-To determine the length of a string we can use the `.length` property of the string. 
+To determine the length of a string we can use the `.length` property of the string.
 */
 
 let a_text = "This is a sentence."
@@ -254,15 +225,13 @@ for (let i = 0; i <= max_char; i++) {
 console.log(new_text)
 
 /*
-### Template Literals
-In ES6, string literals can be delimited with  backtics "`".
+### Template Literals In ES6, string literals can be delimited with backtics "`".
 */
 
 console.log(`This is a string with backticks`)
 
 /*
-This matters because strings with these delimiters allow for interpolation, namely the final value of a string literal
-in backticks is computed by evaluating any included expressions, converting the values of those expressions to strings and combining those computed strings with the literal characters within the backticks.
+This matters because strings with these delimiters allow for interpolation, namely the final value of a string literal in backticks is computed by evaluating any included expressions, converting the values of those expressions to strings and combining those computed strings with the literal characters within the backticks.
 */
 
 let cur_name = "Bill";
@@ -280,8 +249,7 @@ let greeting_works = `Hello ${ cur_name }. `
 console.log(greeting_works)
 
 /*
-#### Tagged template literals
-Tags are functions that perform custom parsing of a template literal. It is just like template literals, however we pass the "tag" to the beggining of the string and it will perform the operation on the entire string.
+#### Tagged template literals Tags are functions that perform custom parsing of a template literal. It is just like template literals, however we pass the "tag" to the beggining of the string and it will perform the operation on the entire string.
 */
 
 function romanize (num) {
@@ -340,9 +308,7 @@ console.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4
 console.log(romeNumerizeEverything`I have ${ 2 } cats. My partner has none. But my neighbour has ${ 4 } cats. His neighbour, however, has something like ${ 12 } cats.`)
 
 /*
-## Boolean Values
-A boolean value represents truth or falsehood, on or off, yes or no. There are only two possible values of this type. The reserved words true and false evaluate to these two values. These will be covered in more detail later one...
-Overall, we can use operators to generate boolean values. e.g.
+## Boolean Values A boolean value represents truth or falsehood, on or off, yes or no. There are only two possible values of this type. The reserved words true and false evaluate to these two values. These will be covered in more detail later one... Overall, we can use operators to generate boolean values. e.g.
 */
 
 let a = null;
@@ -351,7 +317,7 @@ console.log(a === null);
 console.log(a !== 2);
 
 /*
-As in other programming languages, like R, we have the `&` and `|` boolean operators representing the boolean **AND**/**OR**.
+As in other programming languages, like R, we have the `&` and `|` boolean operators representing the boolean AND/OR.
 */
 
 let a = "reasonably large string";
@@ -361,7 +327,7 @@ if (a.length > 3 & a.length < 500) {
 }
 
 /*
-The `&&` operator evaluates a true value *if and only if* both operands are true, false otherwise.
+The `&&` operator evaluates a true value if and only if both operands are true, false otherwise.
 */
 
 let a = null;
@@ -385,12 +351,7 @@ if (a !== null || (a.length > 3 & a.length < 500) ) {
 }
 
 /*
-## `null` and `undefined`
-`null` is a language keyword that evaluates to a special value that is usually used to indicate the absence of a value. Using the typeof operator on null returns the string “object”, indicating that null can be thought of as a special object value that indicates “no object”.
-The `undefined` value occurs in more specific circumstances, namely:
-* values that have not been initialized
-* when you query an object property that does not exist
-* or in functions which do not return anything or in functions for which no arguments were passed.
+## `null` and `undefined` `null` is a language keyword that evaluates to a special value that is usually used to indicate the absence of a value. Using the typeof operator on null returns the string “object”, indicating that null can be thought of as a special object value that indicates “no object”. The `undefined` value occurs in more specific circumstances, namely: values that have not been initialized when you query an object property that does not exist or in functions which do not return anything or in functions for which no arguments were passed.
 */
 
 let a;
