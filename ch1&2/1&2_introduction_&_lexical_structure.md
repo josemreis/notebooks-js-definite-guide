@@ -2,6 +2,7 @@
 
 Notebook for chapter 1 and 2 of [JavaScript: The Definitive Guide: Master the World's Most-Used Programming Language, 7th Edition](https://www.oreilly.com/library/view/javascript-the-definitive/9781491952016/).
 
+
 ```javascript
 console.log("hello world!");
 ```
@@ -17,6 +18,7 @@ There two main ways of running js scripts.
 
 1. We can run them locally using node.js. The code below shows how:
 
+
 ```shellscript
 node test_running_js_from_node.js
 ```
@@ -25,6 +27,7 @@ node test_running_js_from_node.js
 ```
 
 2. To run a script in the browser, just insert it in `<script>` html element with the path to the script as a value to the `src` attribute. E.g.
+
 
 ```html
 <script src="test_running_js_from_node.js"></script>
@@ -43,6 +46,7 @@ Main features:
 
 JavaScripts supports two types of comments
 
+
 ```javascript
 let a = 1 //this is a comment
 let b = 2 /* this is another commenct, though it can be .......................
@@ -58,6 +62,7 @@ console.log(c)
 ## Literals
 
 A *literal* is a data value that appears directly in a program. The following are all literals.
+
 
 ```javascript
 12 //The number twelve
@@ -93,6 +98,7 @@ The following words are part of JavaScript language and as such should not be us
 
 JavaScript programs are writte using the Unicode character set, and you can use any Unicode characters in strings and comments. This means that programmers can use mathematical symbols and words from non-English languages as constants and variables:
 
+
 ```javascript
 const π = 3.14;
 const sí = true;
@@ -110,6 +116,7 @@ console.log(ザ)
 
 Some computer hardware and software cannot display the full set of Unicode characters. For dealing with these situations, js defines escape sequences that allow users to write Unicode characters using only ASCII characters.
 
+
 ```javascript
 console.log("café"); // Define a variable using a Unicode character
 console.log("caf\u00e9") // => 1; access the variable using an escape sequence
@@ -125,6 +132,7 @@ console.log("caf\u{E9}") // => 1; another form of the same escape sequence
 
 Like other programming languages such sql, js uses the semicolon (`;`) to separate statements. However, the semicolon is optional if statements are separated by lines.
 
+
 ```javascript
 /* this is ok*/
 a = 3
@@ -135,6 +143,7 @@ c = a + b
 ## 7
 ```
 
+
 ```javascript
 /* this is ok */
 a = 3; b = 4; c = a + b;
@@ -142,6 +151,7 @@ a = 3; b = 4; c = a + b;
 ```bash
 ## 7
 ```
+
 
 ```javascript
 /* this is not */
@@ -154,6 +164,7 @@ a = 3 b = 4 c = a + b
 JavaScript does not treat every line break as a semicolon, it usually treats line breaks as semicolons only if it can't parse the code without adding an implicit semicolong. Putting it differently, JavaScript treats a line break as a semicolon if the next nonspace character cannot be interpreted as a continuation of the current statement.
 
 E.g. because `=` is interpreted as a continuation of a, it is not treated as a semicolon. 
+
 
 ```javascript
 let a

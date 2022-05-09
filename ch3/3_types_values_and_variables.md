@@ -15,6 +15,7 @@ Any type which is not one of the described above is defined as *type object* or 
 An ordinary object is an *unordered collection of named values*. However, there are special types of object which differ from these standard objects, such as:
 * An `array` is an *ordered collection of numbered values*
 
+
 ```javascript
 const fruits = ['Maçã', 'Banana'];
 
@@ -25,6 +26,7 @@ console.log(fruits);
 ```
 
 * A `Set` object represents a set of **unique** values
+
 
 ```javascript
 const my_set1 = new Set()
@@ -41,6 +43,7 @@ console.log(my_set1)
 ```
 
 * A `Map` object represents mapping keys to values (fairly similar, at least in usage, to Python's dictionaries)
+
 
 ```typescript
 // this is a map
@@ -66,6 +69,7 @@ Among other...
 
 In a JavaScript program, a base-10 integer is written as a sequence of digits. For example:
 
+
 ```typescript
 0
 3
@@ -77,6 +81,7 @@ In a JavaScript program, a base-10 integer is written as a sequence of digits. F
 
 In addition to base-10 integer literals, JavaScript recognizes hexadecimal (base-16) values. A hexadecimal literal begins with `0x` or `0X`, followed by a string of hexadecimal digits. A hexadecimal digit is one of the digits 0 through 9 or the letters a (or A)
 through f (or F), which represent values 10 through 15. Here are examples of hexadecimal integer literals:
+
 
 ```typescript
 let a = 0xff// => 255: (15*16 + 15)
@@ -93,6 +98,7 @@ console.log(b)
 
 Floating-point literals can have a decimal point; they use the traditional syntax for real numbers. A real value is represented as the integral part of the number, followed by a decimal point and the fractional part of the number.
 
+
 ```typescript
 3.14
 2345.6789
@@ -107,6 +113,7 @@ Floating-point literals can have a decimal point; they use the traditional synta
 ### Arithmetic in JavaScript
 
 JavaScript programs work with numbers using the arithmetic operators . that the language provides. These include + for addition, - for subtraction, * for multiplication, / for division, and % for modulo (remainder after division). ES2016 adds ** for exponentiation. Full details on these and other operators can be found in Chapter 4.
+
 
 ```typescript
 console.log(Math.pow(2,53));// => 9007199254740992: 2 to the power 53
@@ -139,6 +146,7 @@ console.log(Math.trunc(3.9)); // => 3: convert to an integer by truncating fract
 
 Arithmetic in JavaScript does not raise errors in cases of overflow, underflow, or division by zero. When the result of a numeric operation is larger than the largest representable number (overflow), the result is a special infinity value, Infinity.
 
+
 ```javascript
 Infinity
 Number.POSITIVE_INFINITY
@@ -164,6 +172,7 @@ Number.MIN_VALUE/2
 The not-a-number value has one unusual feature in JavaScript: it does not compare equal to any other value, including itself. This means that you can’t write `x === NaN` to determine whether the value of a variable x is NaN. Instead, you must write `x != x`
 or `Number.isNaN(x)`. Those expressions will be true if, and only if, x has the same value as the global constant NaN.
 
+
 ```javascript
 x = NaN
 
@@ -181,6 +190,7 @@ console.log(test_2)
 ```
 
 Related to this, the function `Number.isFinite()` evaluates if an argument is a `Number` other than `NaN`, `Infinity`, or `-Infinity`
+
 
 ```javascript
 a = 1011
@@ -203,6 +213,7 @@ As the name implies, BigInt is a numeric type whose values are integers. The typ
 bility with many other programming languages and APIs. But BigInt values can have thousands or even millions of digits, should you have need to work with numbers that large. You can use BigInt() as a function for converting regular JavaScript numbers or
 strings to BigInt values:
 
+
 ```javascript
 largest_number_allowed = Number.MAX_SAFE_INTEGER
 
@@ -222,6 +233,7 @@ console.log(as_big_int)
 ### Dates and Times
 
 JavaScript defines a simple Date class for representing and manipulating the numbers that represent dates and times. JavaScript Dates are objects, but they also have a numeric representation as a timestamp that specifies the number of elapsed milliseconds since January 1, 1970:
+
 
 ```javascript
 let timestamp = Date.now() // today's date as timestamp
@@ -247,6 +259,7 @@ To include a string in a JavaScript program, simply enclose the characters of th
 
 The original versions of JavaScript required string literals to be written on a single line, and it is common to see JavaScript code that creates long strings by concatenating single-line strings with the + operator. As of ES5, however, you can break a string literal across multiple lines by ending each line but the last with a backslash ( \ ).
 
+
 ```javascript
 a_text = "Hello"
 another_text = "World!"
@@ -266,6 +279,7 @@ console.log(a_text  +  another_text)
 
 The backslash character ( \ ) has a special purpose in JavaScript strings. Combined with the character that follows it, it represents a character that is not otherwise representable within the string. For example, \n is an escape sequence that represents a newline character.
 
+
 ```javascript
 console.log('You can\'t do that!')
 ```
@@ -274,6 +288,7 @@ console.log('You can\'t do that!')
 ```
 
 To determine the length of a string we can use the `.length` property of the string. 
+
 
 ```javascript
 let a_text = "This is a sentence."
@@ -285,6 +300,7 @@ console.log("Current sentence has " + a_text.length + " characters")
 ```
 
 In addition, the JavaScript provides a rich api for working with strings.
+
 
 ```javascript
 console.log(a_text.substring(1,4)); // the 2nd, 3rd, and 4th characters
@@ -324,12 +340,14 @@ console.log(x.trimEnd());
 
 As discussed above, strings are nothing but arrays composed with 16-bit characters. Consequently, they may be index link arrays.
 
+
 ```javascript
 a_text[0] + a_text[1] + a_text[2] + a_text[3];
 ```
 ```bash
 ## 'This'
 ```
+
 
 ```javascript
 // with a for loop
@@ -348,6 +366,7 @@ console.log(new_text)
 
 In ES6, string literals can be delimited with  backtics "`".
 
+
 ```javascript
 console.log(`This is a string with backticks`)
 ```
@@ -357,6 +376,7 @@ console.log(`This is a string with backticks`)
 
 This matters because strings with these delimiters allow for interpolation, namely the final value of a string literal
 in backticks is computed by evaluating any included expressions, converting the values of those expressions to strings and combining those computed strings with the literal characters within the backticks.
+
 
 ```javascript
 let cur_name = "Bill";
@@ -372,6 +392,7 @@ console.log(greeting_works)
 
 Everything within the `{ ... }` will be evaluated as a javascript expression, interpreted, and converted into a string.
 
+
 ```javascript
 let cur_name = Math.PI
 let greeting_works = `Hello ${ cur_name }. `
@@ -384,6 +405,7 @@ console.log(greeting_works)
 #### Tagged template literals
 
 Tags are functions that perform custom parsing of a template literal. It is just like template literals, however we pass the "tag" to the beggining of the string and it will perform the operation on the entire string.
+
 
 ```javascript
 function romanize (num) {
@@ -416,6 +438,26 @@ console.log(romeNumerize`I have ${ 2 } cats. But my neighbour has ${ 4 }`)
 The second function did not work, that is because tagged literals are treated like arrays of strings where the the `${}` is the delimiter spliting the string. Since we only index the strings in position 0 and 1, we are only taking into consideration the first delimiter. To make it scalable to more.
 
 
+```javascript
+function romeNumerizeEverything(strings, ...num) {
+    let newStr = '';
+
+    for (let i = 0; i < strings.length; i++) {
+
+        console.log(` [+] In position ${i} in the strings array we have string: ${strings[i]}`)
+        // because the first string can never be a delimiter
+        if (i > 0) {
+            // fetch the number and subtract the index of its position so we get the next
+            console.log(` [!] In position ${i - 1} in the num array we have value: ${num[i - 1]}`)
+            newStr += romanize(num[i - 1]);
+        }
+        // add the string
+        newStr += strings[i]
+    }
+    return newStr;
+}
+```
+
 
 ```javascript
 console.log(romeNumerizeEverything`I have ${ 2 } cats.`)
@@ -426,6 +468,7 @@ console.log(romeNumerizeEverything`I have ${ 2 } cats.`)
 ##  [!] In position 0 in the num array we have value: 2
 ## I have II cats.
 ```
+
 
 ```javascript
 
@@ -439,6 +482,7 @@ console.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4
 ##  [!] In position 1 in the num array we have value: 4
 ## I have II cats. But my neighbour has IV
 ```
+
 
 ```javascript
 
@@ -455,6 +499,7 @@ console.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4
 ## I have II cats. But my neighbour has IV cats. His neighbour, however, has something like XII cats.
 ```
 
+
 ```javascript
 
 console.log(romeNumerizeEverything`I have ${ 2 } cats. My partner has none. But my neighbour has ${ 4 } cats. His neighbour, however, has something like ${ 12 } cats.`)
@@ -470,6 +515,7 @@ A boolean value represents truth or falsehood, on or off, yes or no. There are o
 
 Overall, we can use operators to generate boolean values. e.g.
 
+
 ```javascript
 let a = null;
 
@@ -483,6 +529,7 @@ console.log(a !== 2);
 
 As in other programming languages, like R, we have the `&` and `|` boolean operators representing the boolean **AND**/**OR**.
 
+
 ```javascript
 let a = "reasonably large string";
 
@@ -495,6 +542,7 @@ if (a.length > 3 & a.length < 500) {
 ```
 
 The `&&` operator evaluates a true value *if and only if* both operands are true, false otherwise.
+
 
 ```javascript
 let a = null;
@@ -510,6 +558,7 @@ if (a !== null && (a.length > 3 & a.length < 500)) {
 ```
 
 The operator `||` evaluates a boolean to true if either or the operands (or all) evaluate to true.
+
 
 ```javascript
 let a = "A";
@@ -533,6 +582,7 @@ The `undefined` value occurs in more specific circumstances, namely:
 * when you query an object property that does not exist
 * or in functions which do not return anything or in functions for which no arguments were passed.
 
+
 ```javascript
 let a;
 console.log(a);
@@ -540,6 +590,7 @@ console.log(a);
 ```bash
 ## undefined
 ```
+
 
 ```javascript
 function iShouldReturnStuff(a, b) {
@@ -551,6 +602,7 @@ console.log(iShouldReturnStuff(1, 3))
 ```bash
 ## undefined
 ```
+
 
 ```javascript
 function iShouldReturnStuff(a, b) {
@@ -572,6 +624,11 @@ console.log(undefined + undefined)
 Symbols were introduced in ES6 to serve as non-string property names. Recall that by default an `Object` is an unordered collection of properties, where each property has a name and a value. Property names are typically strings, but `Symbols` can also serve this purpose.
 
 
+```javascript
+// start by creating an empty Object
+const simpleObject = {};
+```
+
 
 ```javascript
 // generate the string and symbol property names
@@ -584,6 +641,7 @@ console.log(typeof(symbolPropertyName));
 ## string
 ## symbol
 ```
+
 
 ```javascript
 // add properties to the initialized object
@@ -598,6 +656,7 @@ console.log(simpleObject)
 
 To obtain the value of the symbol you have to invoke the symbol value.
 
+
 ```javascript
 Symbol(simpleObject[symbolPropertyName])
 ```
@@ -610,6 +669,7 @@ This usefullness of this object type seems to be tied with iterators which will 
 ## Immutable Primitive Values and Mutable Object Rereferences
 
 The fundamental difference between primitive values (undefined, null, booleans, numbers, and strings) and objects (e.g. arrays and functions) is that the former are immutable - i.e. there is no way of changing a primitive value. E.g.
+
 
 ```javascript
 let s = "hello";
@@ -625,6 +685,7 @@ s
 
 Primitives are also compared by value. Objects, however, are mutable and cannot be compared just by value. Two arrays are not equal even if they have the same values in the same order.
 
+
 ```javascript
 let o = { x: 1 }, p = { x: 1 };
 console.log(o === p);
@@ -637,6 +698,7 @@ console.log(a === b);
 ```
 
 Instead, objects are compared by references: *in js, two objects are equal if and only if they both refer to the same underlying object*.
+
 
 ```javascript
 let a = [];
@@ -651,6 +713,7 @@ console.log(a === b)
 ```
 
 As you can see, assigning object `a`, an empty array, to `b` did not create a copy of it, but rather a reference. Now changes to `b` will also occur in `a` as it references it. If you want to create a new copy of an object, say of `a`, you must **explicitly copy its properties**, in this case, the elements of the array.
+
 
 ```javascript
 let a = [1,2,3,4];
@@ -668,6 +731,27 @@ console.log(c)
 Similarly, if we want to compare two distinct objects, we must compare their elements or properties.
 
 
+```javascript
+function compareArray(a, b) {
+    if (a === b) {
+        console.log("arrays reference each other, so they are the same object");
+        return true;
+    } else if (a.length !== b.length) {
+        console.log("the arrays have different lengths, cannot have the same elements");
+        return false;
+    } else {
+        for (let i = 0; i < a.length; i++) {
+            if (a[i] !== b[i]) {
+                console.log(`Element ${a[i]} in position ${i} is different from ${b[i]} in the same position`)
+                return false;
+            }
+        }
+        console.log("the arrays have the same elements");
+        return true;
+    }
+}
+```
+
 
 ```javascript
 let x = [];
@@ -677,6 +761,10 @@ compareArray(x,y)
 ```bash
 ## arrays reference each other, so they are the same object
 ```
+```bash
+## true
+```
+
 
 ```javascript
 let x = [];
@@ -686,6 +774,10 @@ compareArray(x,y)
 ```bash
 ## the arrays have the same elements
 ```
+```bash
+## true
+```
+
 
 ```javascript
 let x = [1, "a", "b", 2];
@@ -695,6 +787,10 @@ compareArray(x,y)
 ```bash
 ## the arrays have different lengths, cannot have the same elements
 ```
+```bash
+## false
+```
+
 
 ```javascript
 let x = [1, "a", 2, "b"];
@@ -704,10 +800,14 @@ compareArray(x, y)
 ```bash
 ## Element 2 in position 2 is different from b in the same position
 ```
+```bash
+## false
+```
 
 ## Type conversions
 
 JS is very flexible about the types of values it requires as it frequently tries to automatically convert types. Examples below
+
 
 ```javascript
 console.log((10 + " strings")) // it converts the number 10 automatically to a string
