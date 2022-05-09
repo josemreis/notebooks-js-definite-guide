@@ -1180,7 +1180,44 @@
         {
             "language": "markdown",
             "source": [
-                "## Type conversions\n\n"
+                "## Type conversions\n\nJS is very flexible about the types of values it requires as it frequently tries to automatically convert types. Examples below"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "console.log((10 + \" strings\")) // it converts the number 10 automatically to a string\nconsole.log((\"string \" + 10)) \n\nconsole.log(\"10\" * \"10\") // it converts to numbers\n\n\nconsole.log((1 - \"x\")) // string \"x\" can't convert to a number\n\nconsole.log((NaN + \" strings\")) // cant convert a NaN to a string\n"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "10 strings",
+                                "string 10",
+                                "100",
+                                "NaN",
+                                "NaN strings",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "The table below sumarizes javascript automatic type conversions.\n\n![](figs/type-conv.png)\n\n\n### Conversions and equality\n\n"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                ""
             ],
             "outputs": []
         }

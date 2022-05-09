@@ -483,5 +483,24 @@ let y = [1, "a", "b", 2];
 compareArray(x, y)
 
 /*
-## Type conversions
+## Type conversions JS is very flexible about the types of values it requires as it frequently tries to automatically convert types. Examples below
+*/
+
+console.log((10 + " strings")) // it converts the number 10 automatically to a string
+console.log(("string " + 10)) 
+
+console.log("10" * "10") // it converts to numbers
+
+
+console.log((1 - "x")) // string "x" can't convert to a number
+
+console.log((NaN + " strings")) // cant convert a NaN to a string
+
+
+/*
+The table below sumarizes javascript automatic type conversions. ![](figs/type-conv.png) ### Conversions and equality
+*/
+
+/*
+
 */
