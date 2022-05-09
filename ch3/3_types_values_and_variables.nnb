@@ -174,6 +174,8 @@
                             "mime": "application/vnd.code.notebook.stdout",
                             "value": [
                                 "9007199254740992",
+                                "1",
+                                "1",
                                 "3",
                                 ""
                             ]
@@ -307,8 +309,8 @@
                         {
                             "mime": "application/vnd.code.notebook.stdout",
                             "value": [
-                                "1651926093028",
-                                "Sat May 07 2022 13:21:33 GMT+0100 (Western European Summer Time)",
+                                "1652087988829",
+                                "Mon May 09 2022 10:19:48 GMT+0100 (Western European Summer Time)",
                                 ""
                             ]
                         }
@@ -417,12 +419,7 @@
                             "mime": "application/vnd.code.notebook.stdout",
                             "value": [
                                 "his",
-                                "  x",
-                                "x  ",
-                                "**x",
-                                "x--",
-                                "Hello world!",
-                                "Hello world!            ",
+                                "his",
                                 "        Hello world!",
                                 ""
                             ]
@@ -629,10 +626,6 @@
                             "mime": "application/vnd.code.notebook.stdout",
                             "value": [
                                 " [+] In position 0 in the strings array we have string: I have ",
-                                " [+] In position 1 in the strings array we have string:  cats. But my neighbour has ",
-                                " [!] In position 0 in the num array we have value: 2",
-                                " [+] In position 2 in the strings array we have string: ",
-                                " [!] In position 1 in the num array we have value: 4",
                                 "I have II cats. But my neighbour has IV",
                                 ""
                             ]
@@ -679,6 +672,7 @@
                             "mime": "application/vnd.code.notebook.stdout",
                             "value": [
                                 " [+] In position 0 in the strings array we have string: I have ",
+                                " [+] In position 1 in the strings array we have string:  cats. My partner has none. But my neighbour has ",
                                 "I have II cats. My partner has none. But my neighbour has IV cats. His neighbour, however, has something like XII cats.",
                                 ""
                             ]
@@ -1217,7 +1211,349 @@
         {
             "language": "markdown",
             "source": [
-                ""
+                "JS has two values to test whether two values are equal:\n* **strictly equality** (`===`), does not consider the objects/primitives to be equal if they are not of the same data type."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "let a = \"1\";\nlet b = 1;\n\nconsole.log(a === b);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "false",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "* **equality** (`==`), evaluates the equality of two objects/primitives after any js-type conversion."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "let a = \"1\";\nlet b = 1;\n\nconsole.log(a == b);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "true",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Explicit conversions\n\nBesides automatic type conversions, for which just relying on them seems sort of dangerous, you can always explicitly convert the data type."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "console.log(typeof Number(\"3\"));\nconsole.log(typeof String(false));\n// the .toString() method is available to any data type except null\nlet x = 3;\nconsole.log(typeof x.toString());\nlet y = false;\nconsole.log(typeof y.toString());\n\n// because it is a null, it will crash\nlet z = null;\ntry {\n\n    console.log(typeof z.toString());\n\n} catch (error) {\n\n    console.error(error);\n\n}\n\nconsole.log(typeof Boolean([]));"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "number",
+                                "string",
+                                "string",
+                                "string",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stderr",
+                            "value": [
+                                "TypeError: Cannot read properties of null (reading 'toString')",
+                                "    at <Cell 91> [13, 11]",
+                                "    at <Cell 91> [17, 46]",
+                                "    at Script.runInContext (node:vm:139:12)",
+                                "    at Script.runInNewContext (node:vm:144:17)",
+                                "    at Object.runInNewContext (node:vm:298:38)",
+                                "    at C (/home/jr/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:113345)",
+                                "    at t.execCode (/home/jr/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:114312)",
+                                "    at k.<anonymous> (/home/jr/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:142156)",
+                                "    at k.emit (node:events:527:28)",
+                                "    at k.emit (node:domain:475:12)",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "boolean",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "## Variable declaration and assignment\n\n\nOne of the most fundamental techniques of computer programming is the use of names—or identifiers—to represent values. Binding a name to a value gives us a way to refer to that value and use it in the programs we write.\n\nThe term **variable** implies that new values can be assigned: that the value associated with the variable may vary as\nour program runs. If we permanently assign a value to a name, then we call that name a **constant** instead of a variable.\n\nIn modern js, variables are declared with the `let` keyword."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "let i;\n\nconsole.log(i);\n\nlet a, b, c;\n\nconsole.log(a);\nconsole.log(b);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "undefined",
+                                "undefined",
+                                "undefined",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "It is a good practice to assign an initial value as we declare a variable."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "let a = \"hello\", b = \"world\";\n\nconsole.log(a + \" \" + b);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "hello world",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "Now we see an example of declaring a constant. It is a good practice to write constants in upper case."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "const GREETINGS = \"hello world!\";\n\nconsole.log(GREETINGS);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "hello world!",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Variable and constant scope\n\nVariables and constants declared with let and const are **block scoped**. This means that they are only defined within the block of code in which the let or const statement appears. JavaScript class and function definitions are blocks, and so are the bodies of if/else statements, while loops, for loops, and so on.\n\nRoughly speaking, if a variable or constant is declared within a set of curly braces, then those curly braces delimit the region of code in which the variable or constant is defined (though of\ncourse it is not legal to reference a variable or constant from lines of code that execute before the let or const statement that declares the variable).\n\nLinked with this **it is ilegal to use the same name with more than one `let` or `const` within the same scope**."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "let x = 1;\n\nif (x === 1) {\n    let x = 2;\n    console.log(x);\n}\n\nconsole.log(x);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "2",
+                                "1",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "let x = 1;\nlet x = 3;"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.error",
+                            "value": {
+                                "name": "Error",
+                                "message": "Failed to generate code object, \nundefined\n    ^\n\nIdentifier 'x' has already been declared",
+                                "stack": ""
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Variable declarations with var\n\nIn versions of JavaScript before ES6, the only way to declare a variable is with the `var` keyword, and there is no way to declare constants. The syntax of `var` is just like the syntax of `let`.\n\nAlthough var and let have the same syntax, there are important differences in the way they work:\n* Variables declared with var do not have block scope. Instead, they are scoped to the body of the containing function no matter how deeply nested they are inside that function."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "var x = 1;\n\nif (x === 1) {\n    var x = 2;\n    console.log(x);\n}\n\nconsole.log(x);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "2",
+                                "2",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "* Unlike variables declared with let, it is legal to declare the same variable multiple times with var."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "var x = 1;\nvar x = 3;"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Destructuring assignment\n\nIn a destructuring assignment, the value on the righthand\nside of the equals sign is an array or object (a “structured” value), and the lefthand side specifies one or more variable names using a syntax that mimics array and object\nliteral syntax. When a destructuring assignment occurs, one or more values are extracted (“destructured”) from the value on the right and stored into the variables named on the left. "
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "let [x,y] = [1,2];\n[x,y] = [x+1,y+1];\n[x,y] = [y,x];\n[x,y]"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "text/plain",
+                            "value": [
+                                "[",
+                                "  \u001b[33m3\u001b[39m,",
+                                "  \u001b[33m2\u001b[39m",
+                                "]"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "The number of variables on the left of a destructuring assignment does not have to match the number of array elements on the right. Extra variables on the left are set to undefined , and extra values on the right are ignored."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "let [x,y] = [1];\n// x == 1; y == undefined\n[x,y] = [1,2,3];\n// x == 1; y == 2\n[,x,,y] = [1,2,3,4]; // x == 2; y == 4\n\nconsole.log([,x,,y])\nconsole.log([x,y])"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "[ <1 empty item>, 2, <1 empty item>, 4 ]",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "If you want to collect all unused or remaining values into a single variable when\ndestructuring an array, use three dots ( ... ) before the last variable name on the left-\nhand side:"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "let [x, ...y] = [1,2,3,4]; // y == [2,3,4]"
             ],
             "outputs": []
         }

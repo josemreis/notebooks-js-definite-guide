@@ -502,5 +502,138 @@ The table below sumarizes javascript automatic type conversions. ![](figs/type-c
 */
 
 /*
-
+JS has two values to test whether two values are equal: strictly equality (`===`), does not consider the objects/primitives to be equal if they are not of the same data type.
 */
+
+let a = "1";
+let b = 1;
+
+console.log(a === b);
+
+/*
+equality (`==`), evaluates the equality of two objects/primitives after any js-type conversion.
+*/
+
+let a = "1";
+let b = 1;
+
+console.log(a == b);
+
+/*
+### Explicit conversions Besides automatic type conversions, for which just relying on them seems sort of dangerous, you can always explicitly convert the data type.
+*/
+
+console.log(typeof Number("3"));
+console.log(typeof String(false));
+// the .toString() method is available to any data type except null
+let x = 3;
+console.log(typeof x.toString());
+let y = false;
+console.log(typeof y.toString());
+
+// because it is a null, it will crash
+let z = null;
+try {
+
+    console.log(typeof z.toString());
+
+} catch (error) {
+
+    console.error(error);
+
+}
+
+console.log(typeof Boolean([]));
+
+/*
+## Variable declaration and assignment One of the most fundamental techniques of computer programming is the use of names—or identifiers—to represent values. Binding a name to a value gives us a way to refer to that value and use it in the programs we write. The term variable implies that new values can be assigned: that the value associated with the variable may vary as our program runs. If we permanently assign a value to a name, then we call that name a constant instead of a variable. In modern js, variables are declared with the `let` keyword.
+*/
+
+let i;
+
+console.log(i);
+
+let a, b, c;
+
+console.log(a);
+console.log(b);
+
+/*
+It is a good practice to assign an initial value as we declare a variable.
+*/
+
+let a = "hello", b = "world";
+
+console.log(a + " " + b);
+
+/*
+Now we see an example of declaring a constant. It is a good practice to write constants in upper case.
+*/
+
+const GREETINGS = "hello world!";
+
+console.log(GREETINGS);
+
+/*
+### Variable and constant scope Variables and constants declared with let and const are block scoped. This means that they are only defined within the block of code in which the let or const statement appears. JavaScript class and function definitions are blocks, and so are the bodies of if/else statements, while loops, for loops, and so on. Roughly speaking, if a variable or constant is declared within a set of curly braces, then those curly braces delimit the region of code in which the variable or constant is defined (though of course it is not legal to reference a variable or constant from lines of code that execute before the let or const statement that declares the variable). Linked with this it is ilegal to use the same name with more than one `let` or `const` within the same scope.
+*/
+
+let x = 1;
+
+if (x === 1) {
+    let x = 2;
+    console.log(x);
+}
+
+console.log(x);
+
+let x = 1;
+let x = 3;
+
+/*
+### Variable declarations with var In versions of JavaScript before ES6, the only way to declare a variable is with the `var` keyword, and there is no way to declare constants. The syntax of `var` is just like the syntax of `let`. Although var and let have the same syntax, there are important differences in the way they work: Variables declared with var do not have block scope. Instead, they are scoped to the body of the containing function no matter how deeply nested they are inside that function.
+*/
+
+var x = 1;
+
+if (x === 1) {
+    var x = 2;
+    console.log(x);
+}
+
+console.log(x);
+
+/*
+Unlike variables declared with let, it is legal to declare the same variable multiple times with var.
+*/
+
+var x = 1;
+var x = 3;
+
+/*
+### Destructuring assignment In a destructuring assignment, the value on the righthand side of the equals sign is an array or object (a “structured” value), and the lefthand side specifies one or more variable names using a syntax that mimics array and object literal syntax. When a destructuring assignment occurs, one or more values are extracted (“destructured”) from the value on the right and stored into the variables named on the left.
+*/
+
+let [x,y] = [1,2];
+[x,y] = [x+1,y+1];
+[x,y] = [y,x];
+[x,y]
+
+/*
+The number of variables on the left of a destructuring assignment does not have to match the number of array elements on the right. Extra variables on the left are set to undefined , and extra values on the right are ignored.
+*/
+
+let [x,y] = [1];
+// x == 1; y == undefined
+[x,y] = [1,2,3];
+// x == 1; y == 2
+[,x,,y] = [1,2,3,4]; // x == 2; y == 4
+
+console.log([,x,,y])
+console.log([x,y])
+
+/*
+If you want to collect all unused or remaining values into a single variable when destructuring an array, use three dots ( ... ) before the last variable name on the left- hand side:
+*/
+
+let [x, ...y] = [1,2,3,4]; // y == [2,3,4]

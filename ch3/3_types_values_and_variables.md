@@ -141,6 +141,8 @@ console.log(Math.trunc(3.9)); // => 3: convert to an integer by truncating fract
 ```
 ```bash
 ## 9007199254740992
+## 1
+## 1
 ## 3
 ```
 
@@ -242,8 +244,8 @@ let now = Date() // today's date as a Date object
 console.log(now)
 ```
 ```bash
-## 1651926093028
-## Sat May 07 2022 13:21:33 GMT+0100 (Western European Summer Time)
+## 1652087988829
+## Mon May 09 2022 10:19:48 GMT+0100 (Western European Summer Time)
 ```
 
 The date methods will be covered in more detail later on. 
@@ -329,12 +331,7 @@ console.log(x.trimEnd());
 ```
 ```bash
 ## his
-##   x
-## x  
-## **x
-## x--
-## Hello world!
-## Hello world!            
+## his
 ##         Hello world!
 ```
 
@@ -476,10 +473,6 @@ console.log(romeNumerizeEverything`I have ${ 2 } cats. But my neighbour has ${ 4
 ```
 ```bash
 ##  [+] In position 0 in the strings array we have string: I have 
-##  [+] In position 1 in the strings array we have string:  cats. But my neighbour has 
-##  [!] In position 0 in the num array we have value: 2
-##  [+] In position 2 in the strings array we have string: 
-##  [!] In position 1 in the num array we have value: 4
 ## I have II cats. But my neighbour has IV
 ```
 
@@ -506,6 +499,7 @@ console.log(romeNumerizeEverything`I have ${ 2 } cats. My partner has none. But 
 ```
 ```bash
 ##  [+] In position 0 in the strings array we have string: I have 
+##  [+] In position 1 in the strings array we have string:  cats. My partner has none. But my neighbour has 
 ## I have II cats. My partner has none. But my neighbour has IV cats. His neighbour, however, has something like XII cats.
 ```
 
@@ -838,3 +832,244 @@ The table below sumarizes javascript automatic type conversions.
 
 
 
+JS has two values to test whether two values are equal:
+* **strictly equality** (`===`), does not consider the objects/primitives to be equal if they are not of the same data type.
+
+
+```javascript
+let a = "1";
+let b = 1;
+
+console.log(a === b);
+```
+```bash
+## false
+```
+
+* **equality** (`==`), evaluates the equality of two objects/primitives after any js-type conversion.
+
+
+```javascript
+let a = "1";
+let b = 1;
+
+console.log(a == b);
+```
+```bash
+## true
+```
+
+### Explicit conversions
+
+Besides automatic type conversions, for which just relying on them seems sort of dangerous, you can always explicitly convert the data type.
+
+
+```javascript
+console.log(typeof Number("3"));
+console.log(typeof String(false));
+// the .toString() method is available to any data type except null
+let x = 3;
+console.log(typeof x.toString());
+let y = false;
+console.log(typeof y.toString());
+
+// because it is a null, it will crash
+let z = null;
+try {
+
+    console.log(typeof z.toString());
+
+} catch (error) {
+
+    console.error(error);
+
+}
+
+console.log(typeof Boolean([]));
+```
+```bash
+## number
+## string
+## string
+## string
+```
+```bash
+## TypeError: Cannot read properties of null (reading 'toString')
+##     at <Cell 91> [13, 11]
+##     at <Cell 91> [17, 46]
+##     at Script.runInContext (node:vm:139:12)
+##     at Script.runInNewContext (node:vm:144:17)
+##     at Object.runInNewContext (node:vm:298:38)
+##     at C (/home/jr/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:113345)
+##     at t.execCode (/home/jr/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:114312)
+##     at k.<anonymous> (/home/jr/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:142156)
+##     at k.emit (node:events:527:28)
+##     at k.emit (node:domain:475:12)
+```
+```bash
+## boolean
+```
+
+## Variable declaration and assignment
+
+
+One of the most fundamental techniques of computer programming is the use of names—or identifiers—to represent values. Binding a name to a value gives us a way to refer to that value and use it in the programs we write.
+
+The term **variable** implies that new values can be assigned: that the value associated with the variable may vary as
+our program runs. If we permanently assign a value to a name, then we call that name a **constant** instead of a variable.
+
+In modern js, variables are declared with the `let` keyword.
+
+
+```javascript
+let i;
+
+console.log(i);
+
+let a, b, c;
+
+console.log(a);
+console.log(b);
+```
+```bash
+## undefined
+## undefined
+## undefined
+```
+
+It is a good practice to assign an initial value as we declare a variable.
+
+
+```javascript
+let a = "hello", b = "world";
+
+console.log(a + " " + b);
+```
+```bash
+## hello world
+```
+
+Now we see an example of declaring a constant. It is a good practice to write constants in upper case.
+
+
+```javascript
+const GREETINGS = "hello world!";
+
+console.log(GREETINGS);
+```
+```bash
+## hello world!
+```
+
+### Variable and constant scope
+
+Variables and constants declared with let and const are **block scoped**. This means that they are only defined within the block of code in which the let or const statement appears. JavaScript class and function definitions are blocks, and so are the bodies of if/else statements, while loops, for loops, and so on.
+
+Roughly speaking, if a variable or constant is declared within a set of curly braces, then those curly braces delimit the region of code in which the variable or constant is defined (though of
+course it is not legal to reference a variable or constant from lines of code that execute before the let or const statement that declares the variable).
+
+Linked with this **it is ilegal to use the same name with more than one `let` or `const` within the same scope**.
+
+
+```javascript
+let x = 1;
+
+if (x === 1) {
+    let x = 2;
+    console.log(x);
+}
+
+console.log(x);
+```
+```bash
+## 2
+## 1
+```
+
+
+```javascript
+let x = 1;
+let x = 3;
+```
+```bash
+## name
+## message
+## stack
+```
+
+### Variable declarations with var
+
+In versions of JavaScript before ES6, the only way to declare a variable is with the `var` keyword, and there is no way to declare constants. The syntax of `var` is just like the syntax of `let`.
+
+Although var and let have the same syntax, there are important differences in the way they work:
+* Variables declared with var do not have block scope. Instead, they are scoped to the body of the containing function no matter how deeply nested they are inside that function.
+
+
+```javascript
+var x = 1;
+
+if (x === 1) {
+    var x = 2;
+    console.log(x);
+}
+
+console.log(x);
+```
+```bash
+## 2
+## 2
+```
+
+* Unlike variables declared with let, it is legal to declare the same variable multiple times with var.
+
+
+```javascript
+var x = 1;
+var x = 3;
+```
+
+### Destructuring assignment
+
+In a destructuring assignment, the value on the righthand
+side of the equals sign is an array or object (a “structured” value), and the lefthand side specifies one or more variable names using a syntax that mimics array and object
+literal syntax. When a destructuring assignment occurs, one or more values are extracted (“destructured”) from the value on the right and stored into the variables named on the left. 
+
+
+```javascript
+let [x,y] = [1,2];
+[x,y] = [x+1,y+1];
+[x,y] = [y,x];
+[x,y]
+```
+```bash
+## [
+##   3,
+##   2
+## ]
+```
+
+The number of variables on the left of a destructuring assignment does not have to match the number of array elements on the right. Extra variables on the left are set to undefined , and extra values on the right are ignored.
+
+
+```javascript
+let [x,y] = [1];
+// x == 1; y == undefined
+[x,y] = [1,2,3];
+// x == 1; y == 2
+[,x,,y] = [1,2,3,4]; // x == 2; y == 4
+
+console.log([,x,,y])
+console.log([x,y])
+```
+```bash
+## [ <1 empty item>, 2, <1 empty item>, 4 ]
+```
+
+If you want to collect all unused or remaining values into a single variable when
+destructuring an array, use three dots ( ... ) before the last variable name on the left-
+hand side:
+
+
+```javascript
+let [x, ...y] = [1,2,3,4]; // y == [2,3,4]
+```
